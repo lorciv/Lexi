@@ -11,8 +11,15 @@ public class Composition implements Glyph, Subject {
 	
 	private Observer observer;
 	
-	private List<Glyph> glyphs = new ArrayList<Glyph>();
-	private Glyph root = new Column();
+	private Compositor compositor;
+	private List<Glyph> glyphs;
+	private Glyph root;
+	
+	public Composition(Compositor compositor) {
+		this.compositor = compositor;
+		this.glyphs = new ArrayList<Glyph>();
+		this.root = compositor.compose(glyphs);
+	}
 
 	@Override
 	public void draw(Graphics g, Point loc) {
@@ -27,18 +34,7 @@ public class Composition implements Glyph, Subject {
 	@Override
 	public void add(Glyph child) {
 		glyphs.add(child);
-		
-		root = new Column();
-		Row curRow = null;
-		
-		for (int i = 0; i < glyphs.size(); i++) {
-			if (i % 40 == 0) {
-				curRow = new Row();
-				root.add(curRow);
-			}
-			curRow.add(glyphs.get(i));
-		}
-		
+		root = compositor.compose(glyphs);
 		notifyObservers();
 	}
 

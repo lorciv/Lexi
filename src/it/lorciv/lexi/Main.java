@@ -9,7 +9,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		Composition doc = new Composition();
+		Composition doc = new Composition(new WidthCompositor(450));
 		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
