@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
+import it.lorciv.lexi.util.Point;
+
 class PointTest {
 	
 	private int[][] coords;

@@ -1,4 +1,4 @@
-package it.lorciv.lexi.geom;
+package it.lorciv.lexi.util;
 
 public class Point {
 	

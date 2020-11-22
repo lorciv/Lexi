@@ -1,12 +1,13 @@
-package it.lorciv.lexi;
+package it.lorciv.lexi.glyphs;
 
-import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
-import it.lorciv.lexi.geom.Point;
-import it.lorciv.lexi.geom.Rect;
+import it.lorciv.lexi.util.Point;
+import it.lorciv.lexi.util.Rect;
 
 public class Column implements Glyph {
 	
@@ -18,10 +19,6 @@ public class Column implements Glyph {
 
 	@Override
 	public void draw(Graphics g, Point loc) {
-		Rect bounds = bounds(loc);
-		g.setColor(Color.GREEN);
-		g.drawRect(bounds.getOrigin().getX(), bounds.getOrigin().getY(), bounds.getWidth(), bounds.getHeight());
-		
 		for (Glyph child : children) {
 			child.draw(g, loc);
 			Rect b = child.bounds(loc);
@@ -45,8 +42,13 @@ public class Column implements Glyph {
 	}
 
 	@Override
-	public void add(Glyph child) {
+	public void append(Glyph child) {
 		children.add(child);
+	}
+	
+	@Override
+	public void save(Writer out) throws IOException {
+		// noop
 	}
 
 }

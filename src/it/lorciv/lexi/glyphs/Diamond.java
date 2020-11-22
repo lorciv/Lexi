@@ -1,10 +1,12 @@
-package it.lorciv.lexi;
+package it.lorciv.lexi.glyphs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.io.Writer;
 
-import it.lorciv.lexi.geom.Point;
-import it.lorciv.lexi.geom.Rect;
+import it.lorciv.lexi.util.Point;
+import it.lorciv.lexi.util.Rect;
 
 public class Diamond implements Glyph {
 
@@ -17,10 +19,6 @@ public class Diamond implements Glyph {
 
 	@Override
 	public void draw(Graphics g, Point loc) {
-		Rect bounds = bounds(loc);
-		g.setColor(Color.RED);
-		g.drawRect(bounds.getOrigin().getX(), bounds.getOrigin().getY(), bounds.getWidth(), bounds.getHeight());
-		
 		int x = loc.getX();
 		int y = loc.getY();
 		int[] xPoints = {x+width/2, x+width, x+width/2, x};
@@ -36,8 +34,13 @@ public class Diamond implements Glyph {
 	}
 
 	@Override
-	public void add(Glyph child) {
+	public void append(Glyph child) {
 		throw new UnsupportedOperationException("not a composite");
+	}
+	
+	@Override
+	public void save(Writer out) throws IOException {
+		out.write("{\"type\": \"diamond\"}");
 	}
 
 }

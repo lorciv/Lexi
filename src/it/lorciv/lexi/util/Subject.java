@@ -1,4 +1,4 @@
-package it.lorciv.lexi;
+package it.lorciv.lexi.util;
 
 public interface Subject {
 	

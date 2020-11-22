@@ -1,10 +1,12 @@
-package it.lorciv.lexi;
+package it.lorciv.lexi.glyphs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.IOException;
+import java.io.Writer;
 
-import it.lorciv.lexi.geom.Point;
-import it.lorciv.lexi.geom.Rect;
+import it.lorciv.lexi.util.Point;
+import it.lorciv.lexi.util.Rect;
 
 public class Circle implements Glyph {
 
@@ -19,10 +21,6 @@ public class Circle implements Glyph {
 
 	@Override
 	public void draw(Graphics g, Point loc) {
-		Rect bounds = bounds(loc);
-		g.setColor(Color.RED);
-		g.drawRect(bounds.getOrigin().getX(), bounds.getOrigin().getY(), bounds.getWidth(), bounds.getHeight());
-		
 		g.setColor(Color.BLACK);
 		g.drawOval(loc.getX(), loc.getY(), rad, rad);
 	}
@@ -33,8 +31,17 @@ public class Circle implements Glyph {
 	}
 	
 	@Override
-	public void add(Glyph child) {
+	public void append(Glyph child) {
 		throw new UnsupportedOperationException("not a composite");
+	}
+	
+	@Override
+	public void save(Writer out) throws IOException {
+		out.write("{");
+		out.write("\"type\":\"circle\",");
+		out.write("\"value\":");
+		out.write(String.format("{\"rad\":%d}", rad));
+		out.write("}");
 	}
 
 }
