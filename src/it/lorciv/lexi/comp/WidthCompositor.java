@@ -1,7 +1,9 @@
 package it.lorciv.lexi.comp;
 
+import java.awt.Color;
 import java.util.List;
 
+import it.lorciv.lexi.glyphs.Border;
 import it.lorciv.lexi.glyphs.Column;
 import it.lorciv.lexi.glyphs.Cursor;
 import it.lorciv.lexi.glyphs.Glyph;
@@ -19,7 +21,7 @@ public class WidthCompositor implements Compositor {
 	
 	@Override
 	public Glyph compose(List<Glyph> glyphs, int position) {
-		Glyph root = new Column();
+		Glyph root = new Border(new Column(), Color.BLUE);
 		Glyph row = new Row();
 		
 		for (int i = 0; i < glyphs.size(); i++) {
@@ -33,17 +35,16 @@ public class WidthCompositor implements Compositor {
 			}
 			
 			if (i == position) {
-				g = new Cursor(g);
+				row.append(new Cursor());
 			}
 			
 			row.append(g);
 		}
 		
-		Glyph last = new Pilcrow();
 		if (position == glyphs.size()) {
-			last = new Cursor(last);
+			row.append(new Cursor());
 		}
-		row.append(last);
+		row.append(new Pilcrow());
 		root.append(row);
 		return root;
 	}

@@ -8,19 +8,24 @@ import java.io.Writer;
 import it.lorciv.lexi.util.Point;
 import it.lorciv.lexi.util.Rect;
 
-public class Cursor extends MonoGlyph {
-
-	public Cursor(Glyph component) {
-		super(component);
-	}
+public class Cursor implements Glyph {
+	
+	private int height = 30;
 	
 	@Override
 	public void draw(Graphics g, Point loc) {
-		super.draw(g, loc);
-		
-		Rect bounds = this.component.bounds(loc);
 		g.setColor(Color.BLACK);
-		g.drawLine(bounds.getOrigin().getX(), bounds.getOrigin().getY(), bounds.getOrigin().getX(), bounds.getExtent().getY());
+		g.drawLine(loc.getX(), loc.getY(), loc.getX(), loc.getY() + height);
+	}
+
+	@Override
+	public Rect bounds(Point loc) {
+		return new Rect(loc, new Point(loc.getX(), loc.getY() + height));
+	}
+
+	@Override
+	public void append(Glyph child) {
+		throw new UnsupportedOperationException("not a composite"); 
 	}
 	
 	@Override
