@@ -20,7 +20,7 @@ public class Pilcrow implements Glyph {
 
 	@Override
 	public Rect bounds(Point loc) {
-		return new Rect(loc, new Point(loc.getX() + 30, loc.getY() + 30));
+		return new Rect(loc, loc);
 	}
 
 	@Override

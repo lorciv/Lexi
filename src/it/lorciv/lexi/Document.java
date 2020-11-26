@@ -35,6 +35,13 @@ public class Document implements Subject {
 		notifyObservers();
 	}
 	
+	public void del() {
+		position--;
+		glyphs.remove(position);
+		root = compositor.compose(glyphs, position);
+		notifyObservers();
+	}
+	
 	public void draw(Graphics g, Point loc) {
 		root.draw(g, loc);
 	}

@@ -35,4 +35,9 @@ public class StandardController implements Controller {
 		}
 	}
 
+	@Override
+	public void handleBack() {
+		doc.del();
+	}
+
 }

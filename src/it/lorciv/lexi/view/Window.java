@@ -39,14 +39,25 @@ public class Window {
 		frame.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
+				char c = e.getKeyChar();
+				System.out.println("actionkey = " + e.isActionKey());
+				if (c == (char)8) {
+					return;
+				}
 				controller.handleKey(e.getKeyChar());
 			}
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				switch (e.getKeyCode()) {
+				case KeyEvent.VK_LEFT:
 					controller.handleMove("left");
-				} else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+					break;
+				case KeyEvent.VK_RIGHT:
 					controller.handleMove("right");
+					break;
+				case KeyEvent.VK_BACK_SPACE:
+					controller.handleBack();
+					break;
 				}
 			}
 		});

@@ -8,6 +8,8 @@ public interface Controller {
 	
 	void handleMove(String dir);
 	
+	void handleBack();
+	
 	void handleMouse(Point loc);
 	
 }

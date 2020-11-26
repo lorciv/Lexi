@@ -20,7 +20,7 @@ public class WidthCompositor implements Compositor {
 	}
 	
 	@Override
-	public Glyph compose(List<Glyph> glyphs, int position) {
+	public Glyph compose(List<Glyph> glyphs, int cursorPos) {
 		Glyph root = new Border(new Column(), Color.BLUE);
 		Glyph row = new Row();
 		
@@ -34,16 +34,17 @@ public class WidthCompositor implements Compositor {
 				row = new Row();
 			}
 			
-			if (i == position) {
+			if (i == cursorPos) {
 				row.append(new Cursor());
 			}
 			
 			row.append(g);
 		}
 		
-		if (position == glyphs.size()) {
+		if (cursorPos == glyphs.size()) {
 			row.append(new Cursor());
 		}
+		
 		row.append(new Pilcrow());
 		root.append(row);
 		return root;
